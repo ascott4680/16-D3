@@ -55,7 +55,7 @@ function renderAxes(newXScale, xAxis) {
 function renderCircles(circlesGroup, newXScale, chosenXaxis) {
 
   circlesGroup.transition()
-    .duration(1000)
+    .duration(500)
     .attr("cx", d => newXScale(d[chosenXAxis]));
 
   return circlesGroup;
@@ -75,7 +75,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      return (`State ${d.abbr} <br> Avg. Income ${d.income}<br>${label} ${d[chosenXAxis]}`);
+      return (`State ${d.abbr} <br> Avg. Income $${d.income}<br>${label} ${d[chosenXAxis]}`);
     });
 
   circlesGroup.call(toolTip);

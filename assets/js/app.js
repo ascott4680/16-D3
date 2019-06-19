@@ -30,8 +30,8 @@ var chosenXAxis = "obesity";
 function xScale(newData, chosenXAxis) {
   // create scales
   var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(newData, d => d[chosenXAxis]),
-      d3.max(newData, d => d[chosenXAxis])
+    .domain([d3.min(newData, d => d[chosenXAxis] * 0.8),
+      d3.max(newData, d => d[chosenXAxis] * 1.01)
     ])
     .range([0, width]);
 
@@ -97,7 +97,7 @@ d3.csv("assets/data/data.csv", function(err, newData) {
 
 
   var colors = d3.scaleOrdinal()
-  .domain([20000, 100000])
+  .domain([20000, 100000])  // Not sure about the scale
   .range([0,1000])
   .range(["#A07A19", "#AC30C0", "#EB9A72", "#BA86F5", "#EA22A8"]);
 
@@ -141,7 +141,7 @@ d3.csv("assets/data/data.csv", function(err, newData) {
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d.income))
     .attr("r", 15)
-    .attr("fill", d=>colors(d))
+    .attr("fill", d=>colors(d))  //cant get my color scale to work 
     .attr("opacity", ".75");
 
     

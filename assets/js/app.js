@@ -95,6 +95,13 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 d3.csv("assets/data/data.csv", function(err, newData) {
   if (err) throw err;
 
+
+  var colors = d3.scaleOrdinal()
+  .domain([20000, 100000])
+  .range([0,1000])
+  .range(["#A07A19", "#AC30C0", "#EB9A72", "#BA86F5", "#EA22A8"]);
+
+
   // parse data
   newData.forEach(function(data) {
     data.income = +data.income;
@@ -125,6 +132,7 @@ d3.csv("assets/data/data.csv", function(err, newData) {
   chartGroup.append("g")
     .call(leftAxis);
 
+
   // append initial circles
   var circlesGroup = chartGroup.selectAll("circle")
     .data(newData)
@@ -133,7 +141,7 @@ d3.csv("assets/data/data.csv", function(err, newData) {
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d.income))
     .attr("r", 15)
-    .attr("fill", "grey")
+    .attr("fill", d=>colors(d))
     .attr("opacity", ".75");
 
     
@@ -145,7 +153,7 @@ d3.csv("assets/data/data.csv", function(err, newData) {
   var obesityLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 20)
-    .attr("value", "obesity") // value to grab for event listener
+    .attr("value", "obesity") 
     .classed("active", true)
     .text("Obesity Rate");
 

@@ -97,7 +97,7 @@ d3.csv("assets/data/data.csv", function(err, newData) {
 
 
   var colors = d3.scaleOrdinal()
-  .domain([20000, 100000])  // Not sure about the scale
+  .domain([20000, 100000])  // Not sure about the scale and can't get the color scale to scale :(
   .range([0,1000])
   .range(["#A07A19", "#AC30C0", "#EB9A72", "#BA86F5", "#EA22A8"]);
 
